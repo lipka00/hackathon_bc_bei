@@ -13,15 +13,15 @@ class AddAssetForm extends Component {
                 textAlign: 'left',
                 marginTop: '10px',
                 padding: '10px',
-                width: '90%',
+                width: '95%',
             },
             submitStyle: {
                 flex: '1',
                 background: 'green',
                 color: 'whiter',
                 borderRadius: '4px',
-                padding: '5px',
-                margin: '5px',
+                padding: '9px',
+                margin: '3px',
                 marginTop: '16px',
                 cursor: 'pointer',
                 fontSize: '16px',
@@ -32,11 +32,14 @@ class AddAssetForm extends Component {
                 background: '#fff',
                 padding: '10px',
                 margin: '10px'
-            }
+            },
+
+
         }
 
         return (
             <form onSubmit={this.props.onSubmit} style={style.formStyle}>
+                <div style={style.divWrap}>
                 <div>
                     <input
                         type={"text"}
@@ -72,6 +75,7 @@ class AddAssetForm extends Component {
                         className="btn"
                         style={style.submitStyle}
                     />
+                </div>
                 </div>
             </form>
         );

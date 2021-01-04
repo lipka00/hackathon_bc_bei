@@ -27,8 +27,8 @@ const buttonStyle = {
 
 const textStyle = {
     textAlign: 'center',
-    paddingTop: '72px',
-    paddingBottom: '72px',
+    paddingTop: '6vh',
+    paddingBottom: '5vh',
 };
 
 class Section extends Component {

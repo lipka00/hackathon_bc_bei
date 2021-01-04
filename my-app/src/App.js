@@ -4,13 +4,13 @@ import './App.css';
 import Header from './components/Header'
 import Connection from './Connection'
 import Assets from './components/Assets'
-import MailButton from './components/MailButton'
+import Participants from './components/Participants'
 import Section from './components/Section'
 
 class App extends Component {
 
   state = {
-    name: "Doctor#1",
+    doc_id: "1",
     assets: []
   }
 
@@ -39,7 +39,7 @@ class App extends Component {
 
   getAssets = () => {
     // Search for the users assets
-    Connection.search('queries/selectImageById?id_img=1') 
+    Connection.search('queries/selectAssetByDoctor?doc=resource%3Aorg.blockchain.health.Doctor%23' + this.state.doc_id) 
       .then(data => {
         //store the assets in the assets array
         this.setState({
@@ -78,14 +78,14 @@ class App extends Component {
       <Route exact path={"/assets"} render={props => (
         <React.Fragment>
           <div>
-          <Assets assets={this.state.assets} addAsset={this.addAsset}/>
+          <Assets addAsset={this.addAsset} assets={this.state.assets}/>
           </div>
         </React.Fragment>
       )}
       />
       <Route exact path={"/participants"} render={props => (
         <React.Fragment>
-          <h2>Participants</h2>
+          <Participants/>
         </React.Fragment>
       )}
       />

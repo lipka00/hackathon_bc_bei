@@ -21,7 +21,6 @@ class UserAssetsItems extends Component {
         }
         return (
             <div>
-                <h2>Uploaded Images</h2>
             <div style = { assetStyle.card }>
                 <p>ImageID: {this.props.asset.id_img}</p>
                 <p>Image: {this.props.asset.img}</p>

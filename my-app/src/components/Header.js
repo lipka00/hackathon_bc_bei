@@ -21,7 +21,7 @@ class Header extends Component {
 }
 
 const linkDivStyle = {
-  marginLeft: '5%'
+  marginLeft: '0%'
 }
 
 const wrapper = {
