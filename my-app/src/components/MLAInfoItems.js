@@ -5,11 +5,11 @@ class MLAInfoItems extends Component {
 
     getName() {
         if(this.props.participant2.name != null) {
-            console.log("exists")
+            //console.log("exists")
             return <p>Name: {this.props.participant2.name}</p>
         }
         else {
-            console.log("doesnt exist")
+            //console.log("doesnt exist")
         }
     }
 

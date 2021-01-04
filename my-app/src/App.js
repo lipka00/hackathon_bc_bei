@@ -64,7 +64,7 @@ class App extends Component {
         this.setState({
           assets: assets
         })
-        console.log(data)
+        //console.log(data)
 
       })
   }
@@ -92,7 +92,7 @@ class App extends Component {
         this.setState({
           participants: participants
         })
-        console.log(data2)
+        //console.log(data2)
 
       })
   }
@@ -120,7 +120,7 @@ class App extends Component {
         this.setState({
           participants2: participants2
         })
-        console.log(data3 + "hallo")
+        //console.log(data3 + "hallo")
 
       })
   }

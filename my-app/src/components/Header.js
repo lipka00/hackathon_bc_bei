@@ -21,7 +21,7 @@ class Header extends Component {
 }
 
 const linkDivStyle = {
-  marginLeft: '0%'
+  marginLeft: '3%'
 }
 
 const wrapper = {
@@ -53,7 +53,7 @@ const linkStyle = {
   textDecoration: 'none',
   marginLeft: '0px',
   fontSize: '1rem',
-  padding: '10px'
+  paddingRight: '16px'
 }
 
 const titleStyle = {
