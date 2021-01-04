@@ -6,3 +6,5 @@ The Blockchain is used for features like Trust, Transparency and Restrictions.
 # Information
 - the directory **my-app** builds the frontend of the blockchain application
 - read the README.md in the my-app folder for further informations how to install the prerequisities to work on this frontend 
+
+![home tab](https://github.com/lipka00/hackathon_bc_bei/blob/main/iphone_screen_app.png)
