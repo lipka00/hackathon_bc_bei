@@ -11,11 +11,15 @@ class App extends Component {
 
   state = {
     doc_id: "1",
-    assets: []
+    assets: [],
+    participants: [],
+    participants2: [],
   }
 
   componentWillMount() {
     this.getAssets()
+    this.getParticipants()
+    this.getParticipants2()
   }
 
   addAsset = (id_doc, id_img, img) => {
@@ -65,6 +69,62 @@ class App extends Component {
       })
   }
 
+  getParticipants = () => {
+    // Search for the participants
+    Connection.search('queries/selectDoctor') 
+      .then(data2 => {
+        //store the assets in the participants array
+        this.setState({
+          participants: data2
+        })
+        // Retrieve the user object from the state
+        let user = this.state.user
+        // Add the number of assets to the object
+        //user.numAssets = this.state.assets.length
+        // Update the state
+        this.setState({
+          user
+        })
+
+        let participants = this.state.participants
+
+        // Update the state
+        this.setState({
+          participants: participants
+        })
+        console.log(data2)
+
+      })
+  }
+
+  getParticipants2 = () => {
+    // Search for the participants
+    Connection.search('queries/selectMLA') 
+      .then(data3 => {
+        //store the assets in the participants array
+        this.setState({
+          participants2: data3
+        })
+        // Retrieve the user object from the state
+        let user = this.state.user
+        // Add the number of assets to the object
+        //user.numAssets = this.state.assets.length
+        // Update the state
+        this.setState({
+          user
+        })
+
+        let participants2 = this.state.participants2
+
+        // Update the state
+        this.setState({
+          participants2: participants2
+        })
+        console.log(data3 + "hallo")
+
+      })
+  }
+
   render() {
   return (
     <Router>
@@ -85,7 +145,7 @@ class App extends Component {
       />
       <Route exact path={"/participants"} render={props => (
         <React.Fragment>
-          <Participants/>
+          <Participants participants={this.state.participants} participants2={this.state.participants2}/>
         </React.Fragment>
       )}
       />

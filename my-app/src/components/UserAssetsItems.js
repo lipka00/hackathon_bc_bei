@@ -11,7 +11,7 @@ class UserAssetsItems extends Component {
                 width: '90%',
                 height: 'auto',
                 textAlign: 'left',
-                padding: '20px',
+                padding: '10px',
                 margin: '20px',
                 marginTop: '-3px',
                 border: '2px solid grey',

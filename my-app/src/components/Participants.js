@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import Background from "../images/blockchain.jpg"
+import PropTypes from 'prop-types';
+import DocInfo from './DocInfo'
+import MLAInfo from './MLAInfo'
 
 var divStyle = {
   width: "100%",
@@ -17,7 +20,10 @@ class Participants extends Component {
     return (
       <div style ={divStyle}>
       <div>
-          <h2>Participants</h2>
+          <h2>Doctors</h2>
+          <DocInfo participants = { this.props.participants } />
+          <h2>MLAs</h2>
+          <MLAInfo participants2 = { this.props.participants2 } />
       </div>
       </div>
       );
