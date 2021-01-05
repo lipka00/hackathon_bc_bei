@@ -5,16 +5,29 @@ import PropTypes from 'prop-types';
 
 class AddAssetForm extends Component {
 
-    state = {
-        img_string: ""
+    constructor(props) {
+        super(props);
+        this.getString = this.getString.bind(this);
+        //Initial state
+        this.state = {
+            img_base64: ""
+        };
+    }
+
+    componentDidMount(){
+        this.loadImage();
       }
 
-    componentWillMount() {
-        this.loadImage()
-      }
-
-    loadImage() {
+    //Function which get the image and safe it to state
+    loadImage = () => {
         var input, file, fr, img;
+
+        const createImage = () => {
+            img = new Image();
+            img.onload = imageLoaded;
+            img.src = fr.result;
+            console.log("SRC   : " + img.src)
+        }
 
         if (typeof window.FileReader !== 'function') {
             console.log("The file API isn't supported on this browser yet.");
@@ -38,40 +51,38 @@ class AddAssetForm extends Component {
             fr.readAsDataURL(file);
         }
 
-        function createImage() {
-            img = new Image();
-            img.onload = imageLoaded;
-            img.src = fr.result;
-            console.log(img.src)
-        }
-
-        //user errors
-        /*function write(msg) {
-            var p = document.createElement('p');
-            p.innerHTML = msg;
-            document.body.appendChild(p);
-            }*/
-
-        function imageLoaded() {
+        const imageLoaded = () => {
             var canvas = document.getElementById("canvas")
             canvas.width = img.width;
             canvas.height = img.height;
             var ctx = canvas.getContext("2d");
             ctx.drawImage(img,0,0);
+
             //alert(canvas.toDataURL("image/png"));
-        		var data = canvas.toDataURL("image/png");
+        	var data = canvas.toDataURL();
             //console.log(data);
+            var img_base64 = data;
+            console.log("DATEN : " + img_base64);
+        
 
             //safe this in blockchain
-            var imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
-            var data = imgData.data;
-            //console.log(data)
-            var img_string = data.toString();
-            console.log(img_string)
-            return img_string
+            //var imgData = ctx.getImageData(0,0,canvas.width, canvas.height);
+            //var data = imgData.data;
+            //console.log("BASE: " + data)
+            //var img_string = data.toString();
+            //console.log(img_string)
         }       
-
     }
+
+    getString = () => {
+        var canvas = document.getElementById("canvas")
+        var data = canvas.toDataURL()
+        console.log("MEINE DATEN: " + data)
+        this.setState({
+            img_base64: data
+        });
+    }
+
 
     render() {
         // Styling
@@ -82,6 +93,10 @@ class AddAssetForm extends Component {
                 marginTop: '10px',
                 padding: '10px',
                 width: '95%',
+                borderRadius: '6px',
+                borderStyle: 'solid',
+                borderColor: 'grey',
+                borderWidth: '1px'
             },
             submitStyle: {
                 flex: '1',
@@ -95,7 +110,8 @@ class AddAssetForm extends Component {
                 fontSize: '16px',
                 marginLeft: 'auto',
                 display: 'block',
-                marginRight: 'auto'
+                marginRight: 'auto',
+                marginBottom: '24px'
             },
             formStyle: {
                 display: 'block',
@@ -104,6 +120,14 @@ class AddAssetForm extends Component {
                 margin: '10px'
             },
 
+            readonlyStyle: {
+                backgroundColor: 'grey'
+            },
+
+            filePicker: {
+                marginTop: '16px',
+                marginBottom: '16px',
+            }
 
         }
 
@@ -116,7 +140,7 @@ class AddAssetForm extends Component {
                         name={"id_doc"}
                         style={style.formComponentsStyle}
                         placeholder={"Enter Doc ID"}
-                        value={this.props.assetType}
+                        value={this.props.iddoc}
                         onChange={this.props.onChange}>
                     </input>
                 </div>
@@ -126,16 +150,27 @@ class AddAssetForm extends Component {
                         name={"id_img"}
                         style={style.formComponentsStyle}
                         placeholder={"Enter Image ID"}
-                        value={this.props.value}
+                        value={this.props.idimg}
                         onChange={this.props.onChange}/>
                 </div>
                 <div>
                     <input
-                        type={"file"}
-                        name={"img"}
+                        id="readonly"
+                        type={"text"}
+                        name={"img_base64"}
                         style={style.formComponentsStyle}
-                        id='imgfile'
-                        onChange={this.props.onChange}/>
+                        value={this.state.img_base64}
+                        placeholder={"readonly"}
+                        onChange={this.props.onChange}
+                        readOnly/>
+                </div>
+                <div>
+                    <input
+                        type={"file"}
+                        name={"img_base64"}
+                        style={style.filePicker}
+                        id='imgfile'/>
+                    <canvas id="canvas"></canvas>
                 </div>
                 <div>
                     <input
@@ -144,23 +179,25 @@ class AddAssetForm extends Component {
                         className="btn"
                         value="Upload"
                         style={style.submitStyle}
-                        onclick={this.loadImage()}
+                        onClick={(event) => {this.getString(event); this.loadImage(event)}}
                     />
                 </div>
-                <canvas id="canvas"></canvas>
                 </div>
             </form>
         );
     }
 
 }
+//onChange= {this.props.onChange}/>
+//<img width="300" height="200" src={this.getString()}/>
+//onClick={this.loadImage()}
 
 //PropTypes
 AddAssetForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    assetType: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
+    iddoc: PropTypes.string.isRequired,
+    idimg: PropTypes.string.isRequired,
     durationInMonths: PropTypes.string.isRequired
 }
 

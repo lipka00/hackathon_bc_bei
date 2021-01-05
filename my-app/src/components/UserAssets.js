@@ -8,17 +8,16 @@ class UserAssets extends Component {
 
         return (
             <div>
-
             </div>
 
         )}
 }
 
-/*{this.props.assets.map((asset) => (
+/*
+{this.props.assets.map((asset) => (
                     <UserAssetsItems key={asset.id} asset={asset}/>
                 ))}
 */
-
 
 //PropTypes
 UserAssets.propTypes = {

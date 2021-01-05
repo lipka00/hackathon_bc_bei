@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 class UserAssetsItems extends Component {
 
-    imageTranslation = (img) => {
-        img = this.props.asset.img
-        console.log(img)
-    
+    /*imageTranslation = (img_base64) => {
+        img_base64 = this.props.asset.img_base64
+        console.log(img_base64)
+        /*
         for (var i = img.length; i>0; i-=3){
           img.splice(i,0,255);
         }
@@ -44,9 +44,10 @@ class UserAssetsItems extends Component {
         console.log(img.src)
         // append the new img object to the page
         //document.body.appendChild(image);
-        return img.src
+        
+        return img_base64
       }
-
+*/
     render() {
         let assetStyle = {
             card: {
@@ -72,6 +73,7 @@ class UserAssetsItems extends Component {
                 <p>ImageID: {this.props.asset.id_img}</p>
                 <p>Status: {this.props.asset.status}</p>
                 <p>Prediction: {this.props.asset.cancer ? "Cancer predicted": "No Cancer predicted"} </p>
+                <img src={this.imageTranslation()} width="200" height="100"></img>
             </div>
             </div>
 
