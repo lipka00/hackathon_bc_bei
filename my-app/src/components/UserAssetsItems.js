@@ -64,10 +64,6 @@ class UserAssetsItems extends Component {
             }
         }
 
-        const imageStyle = {
-            width: '480',
-            
-        }
 
         //<p>Image: {this.props.asset.img}</p>
         return (
@@ -76,7 +72,6 @@ class UserAssetsItems extends Component {
                 <p>ImageID: {this.props.asset.id_img}</p>
                 <p>Status: {this.props.asset.status}</p>
                 <p>Prediction: {this.props.asset.cancer ? "Cancer predicted": "No Cancer predicted"} </p>
-                <img style={imageStyle} src={this.imageTranslation()} width="200" height="100"></img>
             </div>
             </div>
 
@@ -86,6 +81,7 @@ class UserAssetsItems extends Component {
 }
 //{this.imageTranslation()}
 //"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAAEElEQVQYV2P8z/D/P8MgBgDadgL/qlWIXgAAAABJRU5ErkJggg=="
+//<img style={imageStyle} src={this.imageTranslation()} width="200" height="100"></img>
 //PropTypes
 UserAssetsItems.propTypes = {
     asset: PropTypes.object.isRequired

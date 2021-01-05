@@ -15,7 +15,7 @@ class AddAsset extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         this.props.addAsset(this.state.id_doc, this.state.id_img, this.state.img);
-        this.setState({ id_doc: '', id_img: '', img: [] });
+        this.setState({ id_doc: '', id_img: '', img: '' });
     }
 
       // Handles when information is changed in the form storing it in the state
