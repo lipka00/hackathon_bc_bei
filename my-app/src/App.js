@@ -20,15 +20,16 @@ class App extends Component {
     this.getAssets()
     this.getParticipants()
     this.getParticipants2()
+    //this.addAsset()
   }
 
-  addAsset = (id_doc, id_img, img) => {
+  addAsset = (id_doc, id_img, img_base64) => {
     //create Image Object
     const data = {
       '$class': "org.blockchain.health.create_img",
       'id_doc': id_doc,
       'id_img': id_img,
-      'img': img, 
+      'img_base64': img_base64, 
     }
     //send this data to the Hyperledger Network
     Connection.create('create_img', data)
@@ -38,6 +39,9 @@ class App extends Component {
       }
       //Get the new Image
       this.getAssets()
+      console.log("Hallo" + img_base64)
+      console.log("Hallo " + id_img)
+      console.log("Hallo " + id_doc)
     })
   }
 

@@ -46,3 +46,8 @@ li {
   margin-bottom: auto;
   text-align: center;
 }
+
+#readonly {
+  background-color: #c1c7c3;
+  color: #e33939;
+}
