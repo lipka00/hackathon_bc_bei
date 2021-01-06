@@ -25,7 +25,7 @@ class AddAssetForm extends Component {
             img = new Image();
             img.onload = imageLoaded;
             img.src = fr.result;
-            console.log("SRC   : " + img.src)
+            //console.log("SRC   : " + img.src)
         }
 
         if (typeof window.FileReader !== 'function') {
@@ -61,7 +61,7 @@ class AddAssetForm extends Component {
         	var data = canvas.toDataURL();
             //console.log(data);
             var img_base64 = data;
-            console.log("DATEN : " + img_base64);
+            //console.log("DATEN : " + img_base64);
         
 
             //safe this in blockchain
@@ -77,14 +77,16 @@ class AddAssetForm extends Component {
     getString = () => {
         var canvas = document.getElementById("canvas")
         if(canvas != null) {
-            console.log("if")
+            //console.log("if")
             var data = canvas.toDataURL()
             var lol1= document.getElementById("lol")
             lol1 = data;
-            console.log("MEINE DATEN: " + lol1)
+            //console.log("MEINE DATEN: " + lol1)
+            
             this.setState({
                 img_base64: data
             });
+        document.myform1.img_base64.focus();
         }
         else {
             console.log("else")
@@ -95,6 +97,8 @@ class AddAssetForm extends Component {
         });
         */
     }
+
+    
 
 
     render() {
@@ -145,7 +149,7 @@ class AddAssetForm extends Component {
                 display: 'block',
                 background: '#fff',
                 padding: '10px',
-                margin: '10px'
+                marginLeft: '4%'
             },
 
             readonlyStyle: {
@@ -153,8 +157,8 @@ class AddAssetForm extends Component {
             },
 
             filePicker: {
-                marginLeft: '6%',
-                marginTop: '16px',
+                marginLeft: '8%',
+                marginTop: '24px',
                 marginBottom: '16px',
             }
 
@@ -175,7 +179,7 @@ class AddAssetForm extends Component {
             </div>
             </form>
             <button style={style.submitStyle2} value="druck" onClick={this.getString}>Load Image</button>
-            <form onSubmit={this.props.onSubmit} style={style.formStyle}>
+            <form name="myform1" onSubmit={this.props.onSubmit} style={style.formStyle}>
                 <div style={style.divWrap}>
                 <div>
                     <input
@@ -185,7 +189,9 @@ class AddAssetForm extends Component {
                         style={style.formComponentsStyle}
                         value={this.state.img_base64}
                         placeholder={"readonly"}
-                        onBlur={this.props.onChange}/>
+                        onFocus={this.props.onChange}
+                        readOnly
+                        />
                 </div>
                 <div>
                     <input
@@ -211,9 +217,10 @@ class AddAssetForm extends Component {
                         type="submit"
                         value="Submit"
                         className="btn"
-                        value="Upload"
+                        value="Upload to Blockchain"
                         style={style.submitStyle}
-                        onClick={(event) => {this.getString(event); this.loadImage(event)}}
+                       // onClick={(event) => {this.getString(event); this.loadImage(event)}}
+                        onClick={this.loadImage()}
                     />
                 </div>
                 </div>
