@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -72,6 +71,7 @@ class AddAssetForm extends Component {
             //var img_string = data.toString();
             //console.log(img_string)
         }       
+        return this.createImage
     }
 
     getString = () => {
@@ -132,6 +132,19 @@ class AddAssetForm extends Component {
         }
 
         return (
+            <div>
+            <form action='#' onsubmit="return false;">
+            <div>
+                <input
+                    type={"file"}
+                    name={"img_base64"}
+                    style={style.filePicker}
+                    id='imgfile'
+                    onChange={this.props.onChange}/>
+                <input type='button' id='btnLoad' value='Load' onclick={this.loadImage()} />
+                <canvas id="canvas"></canvas>
+            </div>
+            </form>
             <form onSubmit={this.props.onSubmit} style={style.formStyle}>
                 <div style={style.divWrap}>
                 <div>
@@ -161,16 +174,7 @@ class AddAssetForm extends Component {
                         style={style.formComponentsStyle}
                         value={this.state.img_base64}
                         placeholder={"readonly"}
-                        onChange={this.props.onChange}
-                        readOnly/>
-                </div>
-                <div>
-                    <input
-                        type={"file"}
-                        name={"img_base64"}
-                        style={style.filePicker}
-                        id='imgfile'/>
-                    <canvas id="canvas"></canvas>
+                        onChange={this.props.onChange}/>
                 </div>
                 <div>
                     <input
@@ -184,6 +188,7 @@ class AddAssetForm extends Component {
                 </div>
                 </div>
             </form>
+            </div>
         );
     }
 
@@ -202,3 +207,58 @@ AddAssetForm.propTypes = {
 }
 
 export default AddAssetForm
+
+/*
+<form onSubmit={this.props.onSubmit} style={style.formStyle}>
+                <div style={style.divWrap}>
+                <div>
+                    <input
+                        type={"text"}
+                        name={"id_doc"}
+                        style={style.formComponentsStyle}
+                        placeholder={"Enter Doc ID"}
+                        value={this.props.iddoc}
+                        onChange={this.props.onChange}>
+                    </input>
+                </div>
+                <div>
+                    <input
+                        type={"text"}
+                        name={"id_img"}
+                        style={style.formComponentsStyle}
+                        placeholder={"Enter Image ID"}
+                        value={this.props.idimg}
+                        onChange={this.props.onChange}/>
+                </div>
+                <div>
+                    <input
+                        id="readonly"
+                        type={"text"}
+                        name={"img_base64"}
+                        style={style.formComponentsStyle}
+                        value={this.state.img_base64}
+                        placeholder={"readonly"}
+                        onChange={this.props.onChange}/>
+                </div>
+                <div>
+                    <input
+                        type={"file"}
+                        name={"img_base64"}
+                        style={style.filePicker}
+                        id='imgfile'
+                        onChange={this.loadImage()}/>
+                    <canvas id="canvas"></canvas>
+                </div>
+                <div>
+                    <input
+                        type="submit"
+                        value="Submit"
+                        className="btn"
+                        value="Upload"
+                        style={style.submitStyle}
+                        onClick={(event) => {this.getString(event); this.loadImage(event)}}
+                    />
+                </div>
+                </div>
+            </form>
+            */
