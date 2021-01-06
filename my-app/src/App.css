@@ -47,3 +47,9 @@ h2 {
   margin-left: auto;
   margin-right: auto;
 }
+
+#btnLoad {
+  width: 0px;
+  height: 0px;
+  border: none;
+}

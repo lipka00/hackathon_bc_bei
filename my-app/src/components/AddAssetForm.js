@@ -9,7 +9,7 @@ class AddAssetForm extends Component {
         this.getString = this.getString.bind(this);
         //Initial state
         this.state = {
-            img_base64: ""
+            img_base64: "Placeholder"
         };
     }
 
@@ -76,11 +76,24 @@ class AddAssetForm extends Component {
 
     getString = () => {
         var canvas = document.getElementById("canvas")
-        var data = canvas.toDataURL()
-        console.log("MEINE DATEN: " + data)
-        this.setState({
+        if(canvas != null) {
+            console.log("if")
+            var data = canvas.toDataURL()
+            var lol1= document.getElementById("lol")
+            lol1 = data;
+            console.log("MEINE DATEN: " + lol1)
+            this.setState({
+                img_base64: data
+            });
+        }
+        else {
+            console.log("else")
+            var data= 1;
+        }
+        /*this.setState({
             img_base64: data
         });
+        */
     }
 
 
@@ -113,6 +126,21 @@ class AddAssetForm extends Component {
                 marginRight: 'auto',
                 marginBottom: '24px'
             },
+            submitStyle2: {
+                flex: '1',
+                background: '#d94b27',
+                color: 'white',
+                borderRadius: '4px',
+                padding: '9px',
+                margin: '3px',
+                marginTop: '16px',
+                cursor: 'pointer',
+                fontSize: '16px',
+                marginLeft: 'auto',
+                display: 'block',
+                marginRight: 'auto',
+                marginBottom: '24px'
+            },
             formStyle: {
                 display: 'block',
                 background: '#fff',
@@ -125,6 +153,7 @@ class AddAssetForm extends Component {
             },
 
             filePicker: {
+                marginLeft: '6%',
                 marginTop: '16px',
                 marginBottom: '16px',
             }
@@ -145,8 +174,19 @@ class AddAssetForm extends Component {
                 <canvas id="canvas"></canvas>
             </div>
             </form>
+            <button style={style.submitStyle2} value="druck" onClick={this.getString}>Load Image</button>
             <form onSubmit={this.props.onSubmit} style={style.formStyle}>
                 <div style={style.divWrap}>
+                <div>
+                    <input
+                        id="readonly"
+                        type={"text"}
+                        name={"img_base64"}
+                        style={style.formComponentsStyle}
+                        value={this.state.img_base64}
+                        placeholder={"readonly"}
+                        onBlur={this.props.onChange}/>
+                </div>
                 <div>
                     <input
                         type={"text"}
@@ -164,16 +204,6 @@ class AddAssetForm extends Component {
                         style={style.formComponentsStyle}
                         placeholder={"Enter Image ID"}
                         value={this.props.idimg}
-                        onChange={this.props.onChange}/>
-                </div>
-                <div>
-                    <input
-                        id="readonly"
-                        type={"text"}
-                        name={"img_base64"}
-                        style={style.formComponentsStyle}
-                        value={this.state.img_base64}
-                        placeholder={"readonly"}
                         onChange={this.props.onChange}/>
                 </div>
                 <div>
