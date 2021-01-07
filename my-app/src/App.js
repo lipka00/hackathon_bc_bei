@@ -10,7 +10,7 @@ import Section from './components/Section'
 class App extends Component {
 
   state = {
-    doc_id: "1",
+    id_doc: "5",
     assets: [],
     participants: [],
     participants2: [],
@@ -22,6 +22,7 @@ class App extends Component {
     this.getParticipants2()
     //this.addAsset()
   }
+
 
   addAsset = (id_doc, id_img, img_base64) => {
     //create Image Object
@@ -45,12 +46,13 @@ class App extends Component {
       if(img_base64 != 0 && id_img != 0 && id_doc != 0) {
         alert("Success")
       }
+
     })
   }
 
   getAssets = () => {
     // Search for the users assets
-    Connection.search('queries/selectAssetByDoctor?doc=resource%3Aorg.blockchain.health.Doctor%23' + this.state.doc_id) 
+    Connection.search('queries/selectAssetByDoctor?doc=resource%3Aorg.blockchain.health.Doctor%23' + this.state.id_doc) 
       .then(data => {
         //store the assets in the assets array
         this.setState({
@@ -71,7 +73,7 @@ class App extends Component {
         this.setState({
           assets: assets
         })
-        //console.log(data)
+        console.log(data)
 
       })
   }

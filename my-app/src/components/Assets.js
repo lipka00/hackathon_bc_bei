@@ -51,8 +51,8 @@ class Assets extends Component {
 }
 
 //PropTypes
-Assets.propTypes = {
+/*Assets.propTypes = {
   assets: PropTypes.array.isRequired
-}
+}*/
 
 export default Assets
