@@ -9,7 +9,8 @@ class AddAssetForm extends Component {
         this.getString = this.getString.bind(this);
         //Initial state
         this.state = {
-            img_base64: "Placeholder"
+            img_base64: "Placeholder",
+            test: false
         };
     }
 
@@ -71,6 +72,7 @@ class AddAssetForm extends Component {
             //var img_string = data.toString();
             //console.log(img_string)
         }       
+        
         return this.createImage
     }
 
@@ -86,19 +88,25 @@ class AddAssetForm extends Component {
             this.setState({
                 img_base64: data
             });
-        document.myform1.img_base64.focus();
+
+            document.myform1.img_base64.focus();
+    
         }
+        
         else {
             console.log("else")
             var data= 1;
         }
+        
         /*this.setState({
             img_base64: data
         });
         */
     }
 
-    
+    displayCanvas = () => {
+        this.setState({test:true});
+    }
 
 
     render() {
@@ -123,6 +131,7 @@ class AddAssetForm extends Component {
                 padding: '9px',
                 margin: '3px',
                 marginTop: '16px',
+                borderWidth: '1px',
                 cursor: 'pointer',
                 fontSize: '16px',
                 marginLeft: 'auto',
@@ -134,7 +143,9 @@ class AddAssetForm extends Component {
                 flex: '1',
                 background: '#d94b27',
                 color: 'white',
+                borderColor: 'grey',
                 borderRadius: '4px',
+                borderWidth: '1px',
                 padding: '9px',
                 margin: '3px',
                 marginTop: '16px',
@@ -173,9 +184,10 @@ class AddAssetForm extends Component {
                     name={"img_base64"}
                     style={style.filePicker}
                     id='imgfile'
-                    onChange={this.props.onChange}/>
+                    onChange={(event) => {this.props.onChange(event); this.displayCanvas(event)}}/>
                 <input type='button' id='btnLoad' value='Load' onclick={this.loadImage()} />
-                <canvas id="canvas"></canvas>
+                {this.state.test ? <canvas id="canvas"></canvas> : ''}
+               
             </div>
             </form>
             <button style={style.submitStyle2} value="druck" onClick={this.getString}>Load Image</button>
@@ -189,7 +201,7 @@ class AddAssetForm extends Component {
                         style={style.formComponentsStyle}
                         value={this.state.img_base64}
                         placeholder={"readonly"}
-                        onFocus={this.props.onChange}
+                        onBlur={this.props.onChange}
                         readOnly
                         />
                 </div>

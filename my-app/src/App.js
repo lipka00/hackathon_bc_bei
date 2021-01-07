@@ -39,9 +39,12 @@ class App extends Component {
       }
       //Get the new Image
       this.getAssets()
-      console.log("Hallo" + img_base64)
-      console.log("Hallo " + id_img)
-      console.log("Hallo " + id_doc)
+      console.log("BLOCKCHAIN_DATA: " + img_base64)
+      console.log("BLOCKCHAIN_IMG_ID: " + id_img)
+      console.log("BLOCKCHAIN_DOC_ID: " + id_doc)
+      if(img_base64 != 0 && id_img != 0 && id_doc != 0) {
+        alert("Success")
+      }
     })
   }
 
