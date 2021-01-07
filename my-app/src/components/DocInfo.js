@@ -21,4 +21,4 @@ DocInfo.propTypes = {
     participants: PropTypes.array.isRequired
 }
 
-export default DocInfo
+export default DocInfo 

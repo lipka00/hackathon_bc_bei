@@ -76,7 +76,7 @@ class UserAssetsItems extends Component {
                 <p>ImageID: {this.props.asset.id_img}</p>
                 <p>Status: {this.props.asset.status}</p>
                 <p>Prediction: {this.props.asset.cancer ? "Cancer predicted": "No Cancer predicted"} </p>
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAAEElEQVQYV2P8z/D/P8MgBgDadgL/qlWIXgAAAABJRU5ErkJggg==" width="200" height="100"></img>
+                <img src={this.props.asset.img_base64} alt={this.props.asset.img_base64} width="200" height="150"></img>
             </div>
             </div>
 

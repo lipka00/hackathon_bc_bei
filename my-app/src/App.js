@@ -10,7 +10,7 @@ import Section from './components/Section'
 class App extends Component {
 
   state = {
-    id_doc: "5",
+    id_doc: "1",
     assets: [],
     participants: [],
     participants2: [],

@@ -30,19 +30,19 @@ class AddAssetForm extends Component {
         }
 
         if (typeof window.FileReader !== 'function') {
-            console.log("The file API isn't supported on this browser yet.");
+            //console.log("The file API isn't supported on this browser yet.");
             return;
         }
 
         input = document.getElementById('imgfile');
         if (!input) {
-            console.log("Um, couldn't find the imgfile element.");
+            //console.log("Um, couldn't find the imgfile element.");
         }
         else if (!input.files) {
-            console.log("This browser doesn't seem to support the `files` property of file inputs.");
+            //console.log("This browser doesn't seem to support the `files` property of file inputs.");
         }
         else if (!input.files[0]) {
-            console.log("Please select a file before clicking 'Load'");
+            //console.log("Please select a file before clicking 'Load'");
         }
         else {
             file = input.files[0];
@@ -148,13 +148,13 @@ class AddAssetForm extends Component {
                 borderWidth: '1px',
                 padding: '9px',
                 margin: '3px',
-                marginTop: '16px',
+                marginTop: '0px',
                 cursor: 'pointer',
                 fontSize: '16px',
                 marginLeft: 'auto',
                 display: 'block',
                 marginRight: 'auto',
-                marginBottom: '24px'
+                marginBottom: '0px'
             },
             formStyle: {
                 display: 'block',
@@ -185,7 +185,7 @@ class AddAssetForm extends Component {
                     style={style.filePicker}
                     id='imgfile'
                     onChange={(event) => {this.props.onChange(event); this.displayCanvas(event)}}/>
-                <input type='button' id='btnLoad' value='Load' onclick={this.loadImage()} />
+                <input type='button' id='btnLoad' value='Load' onClick={this.loadImage()} />
                 {this.state.test ? <canvas id="canvas"></canvas> : ''}
                
             </div>
