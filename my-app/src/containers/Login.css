@@ -1,0 +1,44 @@
+.Login {
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50%;
+}
+
+.Login form {
+    margin: 0 auto;
+    max-width: 320px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: monospace;
+}
+
+.form-control {
+    height: 6vh;
+    width: 80%;
+    border-radius:4px;
+    padding-left: 16px;
+    font-size: 1.0rem;
+    font-family: monospace;
+}
+
+
+#labelLogin {
+    color: white;
+    margin-right: 5%;
+}
+
+#loginButton {
+    margin-top: 10%;
+    background-color: rgb(26, 98, 145);
+    border-radius: 3px;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    height: 8vh;
+    font-size: 1.25rem;
+    font-family: monospace;
+  }

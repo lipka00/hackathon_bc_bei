@@ -6,6 +6,7 @@ import Connection from './Connection'
 import Assets from './components/Assets'
 import Participants from './components/Participants'
 import Section from './components/Section'
+import Login from './containers/Login'
 
 class App extends Component {
 
@@ -138,7 +139,10 @@ class App extends Component {
   return (
     <Router>
       <Header/>
-      <Route exact path={"/"} render={props => (
+      <Route exact path="/">
+        <Login />
+      </Route>
+      <Route exact path={"/home"} render={props => (
         <React.Fragment>
           <Section></Section>
         </React.Fragment>
