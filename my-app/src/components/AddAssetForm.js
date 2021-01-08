@@ -148,7 +148,7 @@ class AddAssetForm extends Component {
                 borderWidth: '1px',
                 padding: '9px',
                 margin: '3px',
-                marginTop: '0px',
+                marginTop: '16px',
                 cursor: 'pointer',
                 fontSize: '16px',
                 marginLeft: 'auto',
