@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Message, Form } from "semantic-ui-react";
 
 
 class AddAssetForm extends Component {
@@ -9,8 +10,9 @@ class AddAssetForm extends Component {
         this.getString = this.getString.bind(this);
         //Initial state
         this.state = {
-            img_base64: "Placeholder",
-            test: false
+            img_base64: "readonly",
+            test: false,
+            success: false
         };
     }
 
@@ -106,6 +108,10 @@ class AddAssetForm extends Component {
 
     displayCanvas = () => {
         this.setState({test:true});
+    }
+
+    setSuccess = () => {
+        this.setState({success:true});
     }
 
 
@@ -232,8 +238,20 @@ class AddAssetForm extends Component {
                         value="Upload to Blockchain"
                         style={style.submitStyle}
                        // onClick={(event) => {this.getString(event); this.loadImage(event)}}
-                        onClick={this.loadImage()}
+                        //onClick={this.loadImage()}
+                        onClick={(event) => {this.setSuccess(event); this.loadImage(event)}}
                     />
+                </div>
+                <div>
+                {this.state.formError ? 
+                (
+                    <Message
+                    positive
+                    header="Your Image Upload was successful"
+                    content="Your Chosen Image is saved on the blockchain"
+                    />
+                ) 
+                : <p></p> } 
                 </div>
                 </div>
             </form>

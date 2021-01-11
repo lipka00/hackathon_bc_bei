@@ -52,7 +52,7 @@ class App extends Component {
 
   getAssets = () => {
     // Search for the users assets
-    Connection.search('queries/selectAssetByDoctor?doc=resource%3Aorg.blockchain.health.Doctor%23' + this.state.id_doc) 
+    Connection.search('queries/selectImageByDoctor?doc=resource%3Aorg.blockchain.health.Doctor%23' + this.state.id_doc) 
       .then(data => {
         //store the assets in the assets array
         this.setState({
