@@ -1,0 +1,82 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace org.blockchain.health
+
+/** Enums **/
+
+enum Status {
+ o diagnosed
+ o undiagnosed
+}
+
+/** Participants **/
+
+participant Doctor identified by id_doc {
+  o String id_doc
+  o String name optional
+  o String address optional
+}
+
+participant MLA identified by id_mla {
+  o String id_mla
+  o String name optional
+  o String address optional
+}
+
+/** Assets **/
+
+asset Image identified by id_img {
+  o String id_img
+  --> Doctor doc
+  --> MLA mla optional
+  o Status status default="undiagnosed"
+  o Boolean cancer optional
+  o Integer width optional
+  o Integer height optional
+  o String img_base64
+  o String img_csv optional
+}
+
+/** Transactions & Events **/
+
+/** Doctor **/
+  
+transaction create_img {
+  o String id_doc
+  o String id_img
+  o Integer width optional
+  o Integer height optional
+  o String img_base64
+  o String img_csv optional
+}
+  
+event create_img_event{
+  --> Doctor doc
+}
+
+/** Machine Learning Architect **/
+  
+transaction diagnose_img {  
+  o String id_mla
+  o String id_img
+  o Boolean cancer
+}
+  
+event diagnose_img_event{
+  --> Image img_base64
+  --> MLA mla
+  o Status status
+  o Boolean cancer
+}
