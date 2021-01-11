@@ -138,7 +138,10 @@ class App extends Component {
   return (
     <Router>
       <Header/>
-      <Route exact path={"/"} render={props => (
+      <Route exact path="/">
+        <Login />
+      </Route>
+      <Route exact path={"/home"} render={props => (
         <React.Fragment>
           <Section></Section>
         </React.Fragment>
