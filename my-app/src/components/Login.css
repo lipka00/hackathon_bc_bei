@@ -1,0 +1,165 @@
+
+.form-inner {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    width: 90%;
+    color: white;
+}
+
+.form-group {
+    width: 90%;
+    margin: auto;
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+#login {
+    margin-left: 14.4%;
+    height: 35px;
+    width: 60%;
+}
+
+#password {
+    margin-left: 5%;
+    height: 35px;
+    width: 60%;
+}
+
+#doc {
+    margin-right: 6px;
+}
+
+#mla {
+    margin-right: 6px;
+    margin-left: 12px;
+}
+
+.checkbox {
+    display: flex;
+}
+
+#loginButton {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    width: 100px;
+    border-radius: 3px;
+    background-color: rgb(26, 98, 145);
+    border: 1px solid;
+    border-color:rgb(26, 98, 145);
+    color: white;
+    font-size: 1rem;
+    margin-top: 10%;
+}
+#logoutButton {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    width: 100px;
+    border-radius: 3px;
+    background-color: red;
+    border: 1px solid;
+    border-color:rgb(26, 98, 145);
+    color: white;
+    font-size: 1rem;
+    margin-top: 10%;
+}
+
+.infobox {
+color: green;
+background-color: white;
+margin-top: 32px;
+width: 80%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+border-radius: 3px;
+border: solid 2px;
+border-color: green;
+padding: 10px;
+}
+
+.infobox p {
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.infobox2 {
+    color: red;
+    background-color: white;
+    margin-top: 32px;
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 3px;
+    border: solid 2px;
+    border-color: red;
+    padding: 10px;
+}
+
+.infobox2 p {
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+/*
+.Login {
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50%;
+}
+
+.Login form {
+    margin: 0 auto;
+    max-width: 320px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: monospace;
+}
+
+.form-control {
+    height: 6vh;
+    width: 80%;
+    border-radius:4px;
+    padding-left: 16px;
+    font-size: 1.0rem;
+    font-family: monospace;
+}
+
+.form-group {
+    margin-bottom: 5%;
+}
+
+
+#labelLogin {
+    color: white;
+    margin-right: 5%;
+}
+
+#loginButton {
+    margin-top: 5%;
+    background-color: rgb(26, 98, 145);
+    border-radius: 3px;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    height: 8vh;
+    font-size: 1.25rem;
+    font-family: monospace;
+  }
+
+  .form-check-label {
+      color:white;
+      margin-left: 3%;
+  }
+*/

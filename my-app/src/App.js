@@ -1,11 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header'
+import Header_MLA from './components/Header_MLA'
+import HeaderEmpty from './components/Header_Empty'
 import Connection from './Connection'
 import Assets from './components/Assets'
 import Participants from './components/Participants'
 import Section from './components/Section'
+import Login from './components/LoginForm'
+import Upload from './components/Upload'
 
 class App extends Component {
 
@@ -14,23 +18,35 @@ class App extends Component {
     assets: [],
     participants: [],
     participants2: [],
+    login: "",
+    password: "",
+    type: ""
   }
 
   componentWillMount() {
     this.getAssets()
     this.getParticipants()
     this.getParticipants2()
-    //this.addAsset()
+    //this.setLogin()
   }
 
+  setLogin = (login, password, type) => {
+    this.setState({
+      login: login,
+      password: password,
+      type: type
+    });
+  }
 
-  addAsset = (id_doc, id_img, img_base64) => {
+  addAsset = (img_base64) => {
     //create Image Object
     const data = {
       '$class': "org.blockchain.health.create_img",
-      'id_doc': id_doc,
-      'id_img': id_img,
+      //'id_doc': id_doc,
+      //'id_img': id_img,
       'img_base64': img_base64, 
+      'login': "login",
+      'password': "password"
     }
     //send this data to the Hyperledger Network
     Connection.create('create_img', data)
@@ -41,12 +57,10 @@ class App extends Component {
       //Get the new Image
       this.getAssets()
       console.log("BLOCKCHAIN_DATA: " + img_base64)
-      console.log("BLOCKCHAIN_IMG_ID: " + id_img)
-      console.log("BLOCKCHAIN_DOC_ID: " + id_doc)
-      if(img_base64 != 0 && id_img != 0 && id_doc != 0) {
+      //console.log("BLOCKCHAIN_DOC_ID: " + id_doc)
+      if(img_base64 != 0  ) {
         alert("Success")
       }
-
     })
   }
 
@@ -134,12 +148,89 @@ class App extends Component {
       })
   }
 
+ 
+
   render() {
   return (
-    <Router>
+<div>
+      <Router>
       <Header/>
-      <Route exact path="/">
-        <Login />
+      <Route exact path={"/login"}>
+        <Login getChildInputOnSubmit={this.setLogin} />
+        <div>
+        {this.state.login == "login" && this.state.password =="password"  ? 
+        <div className="infobox">
+          <p>Login Successful</p>
+          <p>User: {this.state.login}</p>
+          <p>Password: {this.state.password}</p>
+          </div> 
+        :
+        <div className="infobox2">
+          <p>Fill Out Login and Password</p>
+          </div>
+        }
+      </div>
+      </Route>
+      <Route exact path={"/"} render={props => (
+        <React.Fragment>
+          <Section></Section>
+        </React.Fragment>
+      )}
+      />
+      <Route exact path={"/assets"} render={props => (
+        <React.Fragment>
+          <div>
+          <Assets addAsset={this.addAsset} assets={this.state.assets}/>
+          </div>
+        </React.Fragment>
+      )}
+      />
+       <Route exact path={"/upload"} render={props => (
+        <React.Fragment>
+          <div>
+          <Upload addAsset={this.addAsset}/>
+          </div>
+        </React.Fragment>
+      )}
+      />
+      <Route exact path={"/participants"} render={props => (
+        <React.Fragment>
+          <Participants participants={this.state.participants} participants2={this.state.participants2}/>
+        </React.Fragment>
+      )}
+      />
+    </Router>
+    
+    </div>
+  );
+}
+}
+
+export default App;
+
+
+/*
+
+<div>
+      {this.state.type != 0 ? 
+      <Router>
+      <Header/>
+      <Route exact path={"/"}>
+        <Login getChildInputOnSubmit={this.setLogin} />
+        <div>
+        {this.state.login == "login" && this.state.password =="password"  ? 
+        <div className="infobox">
+          <p>Login Successful</p>
+          <p>User: {this.state.login}</p>
+          <p>Password: {this.state.password}</p>
+          <p>Type: {this.state.type}</p>
+          </div> 
+        :
+        <div className="infobox2">
+          <p>Fill Out Login and Password</p>
+          </div>
+        }
+      </div>
       </Route>
       <Route exact path={"/home"} render={props => (
         <React.Fragment>
@@ -155,6 +246,14 @@ class App extends Component {
         </React.Fragment>
       )}
       />
+       <Route exact path={"/upload"} render={props => (
+        <React.Fragment>
+          <div>
+          <Upload addAsset={this.addAsset}/>
+          </div>
+        </React.Fragment>
+      )}
+      />
       <Route exact path={"/participants"} render={props => (
         <React.Fragment>
           <Participants participants={this.state.participants} participants2={this.state.participants2}/>
@@ -162,8 +261,34 @@ class App extends Component {
       )}
       />
     </Router>
-  );
-}
-}
+      : 
+    <Router>
+      <Header_MLA/>
+      <Route exact path={"/login"}>
+        <Login getChildInputOnSubmit={this.setLogin} />
+      </Route>
+      <Route exact path={"/"} render={props => (
+        <React.Fragment>
+          <Section></Section>
+        </React.Fragment>
+      )}
+      />
+       <Route exact path={"/diagnose"} render={props => (
+        <React.Fragment>
+          <div>
+          
+          </div>
+        </React.Fragment>
+      )}
+      />
+      <Route exact path={"/participants"} render={props => (
+        <React.Fragment>
+          <Participants participants={this.state.participants} participants2={this.state.participants2}/>
+        </React.Fragment>
+      )}
+      />
+    </Router>
+  }
+    </div>
 
-export default App;
+    */

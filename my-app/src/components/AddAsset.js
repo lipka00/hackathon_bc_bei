@@ -8,9 +8,9 @@ class AddAsset extends Component {
     this.onChange = this.onChange.bind(this);
     // The state stores the form variables
     this.state = {
-      id_doc: '',
-      id_img: '',
-      img_base64: ''
+      img_base64: '',
+      login: "login",
+      password: "pasword",
     };
   }
   
@@ -18,8 +18,8 @@ class AddAsset extends Component {
     // Handles the submit. Passes the form variables to the function addAsset in App.js
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.addAsset(this.state.id_doc, this.state.id_img, this.state.img_base64);
-        this.setState({ id_doc: '', id_img: '', img_base64: '' });
+        this.props.addAsset( this.state.img_base64, this.state.login, this.state.password,);
+        this.setState({  img_base64: '', login: "login", password: "password" });
     }
 
       // Handles when information is changed in the form storing it in the state
@@ -32,7 +32,7 @@ class AddAsset extends Component {
           <div style={overwrap}>
           <h2>Add New Image</h2>
             <div style={wrapperForm}>
-                <AddAssetForm onSubmit={this.onSubmit} onChange={this.onChange} id_doc={this.state.id_doc} id_img={this.state.id_img} img_base64={this.state.img_base64} />
+                <AddAssetForm onSubmit={this.onSubmit} onChange={this.onChange}  img_base64={this.state.img_base64} />
             </div>
           </div>
         );

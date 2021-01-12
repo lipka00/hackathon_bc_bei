@@ -16,7 +16,7 @@ const buttonStyle = {
     background: '#1a6291',
     color: '#fff',
     padding: '10px',
-    height: '20%',
+    height: '30%',
     width: '40%',
     borderRadius: '5px',
   }

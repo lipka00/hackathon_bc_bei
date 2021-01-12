@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Background from '../images/blockchain.jpg';
-import MailButton from './MailButton'
 
 var sectionStyle = {
   width: "100%",
@@ -14,21 +13,28 @@ var sectionStyle = {
 const buttonStyle = {
     marginTop: '32px',
     color: '#fff',
-    height: '12%',
+    height: '16%',
     background: '#1a6291',
     borderRadius: '5px',
     width: '35%',
-    height: 'auto',
     marginLeft: 'auto',
     marginRight: 'auto',
     display: 'block',
     padding: '10px',
+    marginTop: 'auto',
+    marginBottom: 'auto'
 };
 
 const textStyle = {
     textAlign: 'center',
     paddingTop: '6vh',
     paddingBottom: '5vh',
+};
+
+const buttons = {
+  display: 'flex',
+  paddingTop: '6vh',
+  paddingBottom: '5vh',
 };
 
 class Section extends Component {
@@ -49,10 +55,17 @@ class Section extends Component {
                 <li>supports multiple Machine-Learning-Platforms</li>
             </ul>
           </div>
+          <div style={buttons}>
           <div style={ buttonStyle }>
             <div id="special">
-            <a id="special-link" href="mailto:max.mustermann@example.com?body=Hallo AI Diagnostics,">Join Our Network</a>
+            <a id="special-link" href="mailto:max.mustermann@example.com?body=Hallo AI Diagnostics,">Register</a>
             </div>
+          </div>
+          <div style={ buttonStyle }>
+            <div id="special">
+            <a id="special-link" href="/login">Login</a>
+            </div>
+          </div>
           </div>
       </section>
     );

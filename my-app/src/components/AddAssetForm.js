@@ -211,25 +211,7 @@ class AddAssetForm extends Component {
                         readOnly
                         />
                 </div>
-                <div>
-                    <input
-                        type={"text"}
-                        name={"id_doc"}
-                        style={style.formComponentsStyle}
-                        placeholder={"Enter Doc ID"}
-                        value={this.props.iddoc}
-                        onChange={this.props.onChange}>
-                    </input>
-                </div>
-                <div>
-                    <input
-                        type={"text"}
-                        name={"id_img"}
-                        style={style.formComponentsStyle}
-                        placeholder={"Enter Image ID"}
-                        value={this.props.idimg}
-                        onChange={this.props.onChange}/>
-                </div>
+   
                 <div>
                     <input
                         type="submit"
@@ -269,7 +251,7 @@ AddAssetForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     iddoc: PropTypes.string.isRequired,
-    idimg: PropTypes.string.isRequired,
+    //idimg: PropTypes.string.isRequired,
     durationInMonths: PropTypes.string.isRequired
 }
 
