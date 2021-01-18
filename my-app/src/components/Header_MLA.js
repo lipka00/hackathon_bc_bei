@@ -14,7 +14,7 @@ class Header extends Component {
         <div>
         <Link style={linkStyle} to="/">Home</Link>
         <Link style={linkStyle} to="/diagnose">Diagnose</Link>
-        <Link style={linkStyle} to="/participants">Participants</Link>
+        <Link style={linkStyle} to="/participants">Profile</Link>
         </div> 
         <div>
         </div>

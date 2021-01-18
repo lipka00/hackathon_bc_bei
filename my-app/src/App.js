@@ -94,7 +94,7 @@ class App extends Component {
 
   getParticipants = () => {
     // Search for the participants
-    Connection.search('queries/selectDoctor') 
+    Connection.search('queries/getDoctor?login=login&password=password') 
       .then(data2 => {
         //store the assets in the participants array
         this.setState({
@@ -152,55 +152,73 @@ class App extends Component {
 
   render() {
   return (
-<div>
+    <div>
       <Router>
-      <Header/>
-      <Route exact path={"/login"}>
-        <Login getChildInputOnSubmit={this.setLogin} />
-        <div>
-        {this.state.login == "login" && this.state.password =="password"  ? 
-        <div className="infobox">
-          <p>Login Successful</p>
-          <p>User: {this.state.login}</p>
-          <p>Password: {this.state.password}</p>
-          </div> 
-        :
-        <div className="infobox2">
-          <p>Fill Out Login and Password</p>
-          </div>
-        }
+      <div>
+      {
+        (() => {
+            if (this.state.type == "")
+                return <HeaderEmpty/>
+            if (this.state.type == "doc")
+                return <Header/>
+            else if (this.state.type == "mla")
+                return <Header_MLA/>
+        })()
+      }
       </div>
-      </Route>
-      <Route exact path={"/"} render={props => (
-        <React.Fragment>
-          <Section></Section>
-        </React.Fragment>
-      )}
-      />
-      <Route exact path={"/assets"} render={props => (
-        <React.Fragment>
+        <Route exact path={"/login"}>
+          <Login getChildInputOnSubmit={this.setLogin} />
           <div>
-          <Assets addAsset={this.addAsset} assets={this.state.assets}/>
+          {this.state.login == "login" && this.state.password =="password"  ? 
+          <div className="infobox">
+            <p>Login Successful</p>
+            <p>User: {this.state.login}</p>
+            </div> 
+          :
+          <div className="infobox2">
+            <p>Fill Out Login and Password</p>
+            <p>{this.state.type}</p>
+            </div>
+          }
           </div>
-        </React.Fragment>
-      )}
-      />
-       <Route exact path={"/upload"} render={props => (
-        <React.Fragment>
-          <div>
-          <Upload addAsset={this.addAsset}/>
-          </div>
-        </React.Fragment>
-      )}
-      />
-      <Route exact path={"/participants"} render={props => (
-        <React.Fragment>
-          <Participants participants={this.state.participants} participants2={this.state.participants2}/>
-        </React.Fragment>
-      )}
-      />
-    </Router>
-    
+        </Route>
+        <Route exact path={"/"} render={props => (
+          <React.Fragment>
+            <Section></Section>
+          </React.Fragment>
+        )}
+        />
+        <Route exact path={"/assets"} render={props => (
+          <React.Fragment>
+            <div>
+            <Assets addAsset={this.addAsset} assets={this.state.assets}/>
+            </div>
+          </React.Fragment>
+        )}
+        />
+        <Route exact path={"/diagnose"} render={props => (
+          <React.Fragment>
+            <div>
+            <p>Hallo</p>
+            </div>
+          </React.Fragment>
+        )}
+        />
+        <Route exact path={"/upload"} render={props => (
+          <React.Fragment>
+            <div>
+            <Upload addAsset={this.addAsset}/>
+            </div>
+          </React.Fragment>
+        )}
+        />
+        <Route exact path={"/participants"} render={props => (
+          <React.Fragment>
+            <Participants participants={this.state.participants} participants2={this.state.participants2}/>
+          </React.Fragment>
+        )}
+        />
+      </Router>
     </div>
   );
 }

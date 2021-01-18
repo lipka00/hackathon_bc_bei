@@ -23,6 +23,16 @@ class DocInfoItems extends Component {
         }
     }
 
+    getBalance() {
+        if(this.props.participant.balance != null) {
+            //console.log("exists")
+            return <p>Balance: {this.props.participant.balance}</p>
+        }
+        else {
+            //console.log("doesnt exist")
+        }
+    }
+
     render() {
         let assetStyle = {
             card: {
@@ -45,6 +55,7 @@ class DocInfoItems extends Component {
                 <p>DocID: {this.props.participant.id_doc}</p>
                 {this.getName()}
                 {this.getAddress()}
+                {this.getBalance()}
             </div>
             </div>
         )

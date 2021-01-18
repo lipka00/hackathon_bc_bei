@@ -47,7 +47,8 @@ handleChange4 = event => {
 };
 
 logOut = () => {
-  this.setState({logged_in:false, login_child: "", password_child:""});
+  this.setState({logged_in:false, login_child: "", password_child:"", type_child:""});
+  this.props.getChildInputOnSubmit(this.state.type_child);
 }
 
 
@@ -73,7 +74,20 @@ logOut = () => {
           placeholder="Password" 
           onChange={this.handleChange2}/>
         </div>
-        
+        <div className="form-group">
+          <div className="checkbox">
+          <div>
+          <input type="checkbox" id="doc" name="doc" value="doc" onChange={this.handleChange3}
+          />
+          <label for="scales">Doc</label>
+          </div>
+          <div>
+          <input type="checkbox" id="mla" name="mla" onChange={this.handleChange4}
+          />
+          <label for="scales">MLA</label>
+          </div>
+          </div>
+        </div>
         <button id ="loginButton"  type='submit'>Login</button>
       </div>
     </form>
@@ -156,17 +170,17 @@ export default function Login(props) {
 
 /*
 <div className="form-group">
-            <div className="checkbox">
-          <div>
-          <input type="checkbox" id="doc" name="doc" value="doc" onChange={this.handleChange3}
-          />
-          <label for="scales">Doc</label>
-          </div>
-          <div>
-          <input type="checkbox" id="mla" name="mla" onChange={this.handleChange4}
-          />
-          <label for="scales">MLA</label>
-          </div>
-          </div>
-          </div>
+  <div className="checkbox">
+  <div>
+  <input type="checkbox" id="doc" name="doc" value="doc" onChange={this.handleChange3}
+  />
+  <label for="scales">Doc</label>
+  </div>
+  <div>
+  <input type="checkbox" id="mla" name="mla" onChange={this.handleChange4}
+  />
+  <label for="scales">MLA</label>
+  </div>
+  </div>
+</div>
           */
