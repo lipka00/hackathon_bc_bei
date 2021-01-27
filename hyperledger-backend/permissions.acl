@@ -1,5 +1,23 @@
 // Doctor
 
+rule doc_allow_increase_balance {
+  	description: "all doctors can increase their balance"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: CREATE
+    resource: "org.blockchain.health.increase_balance_doc"
+  	transaction: "org.blockchain.health.increase_balance_doc"
+  	action: ALLOW
+}
+
+rule doc_allow_increase_balance2 {
+  	description: "all doctors can increase their balance"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: UPDATE
+    resource: "org.blockchain.health.Doctor"
+  	transaction: "org.blockchain.health.increase_balance_doc"
+  	action: ALLOW
+}
+
 rule doc_allow_create_image {
 	description: "all doctors can create an image"
   	participant: "org.blockchain.health.Doctor"
@@ -10,7 +28,7 @@ rule doc_allow_create_image {
 }
 
 rule doc_allow_read_himself {
-  	description: "a doctor can only read & delete own images"
+  	description: "a doctor can only read himself"
   	participant(doctor): "org.blockchain.health.Doctor"
   	operation: READ
     resource(d): "org.blockchain.health.Doctor"
@@ -101,6 +119,25 @@ rule mla_deny_create_image {
   	transaction: "org.blockchain.health.create_img"
   	action: DENY
 }
+
+rule mla_allow_increase_balance {
+  	description: "all mlas can increase their balance"
+  	participant: "org.blockchain.health.MLA"
+  	operation: CREATE
+    resource: "org.blockchain.health.increase_balance_mla"
+  	transaction: "org.blockchain.health.increase_balance_mla"
+  	action: ALLOW
+}
+
+rule mla_allow_increase_balance2 {
+  	description: "all doctors can increase their balance"
+  	participant: "org.blockchain.health.MLA"
+  	operation: UPDATE
+    resource: "org.blockchain.health.MLA"
+  	transaction: "org.blockchain.health.increase_balance_mla"
+  	action: ALLOW
+}
+
 // Administration
 
 
