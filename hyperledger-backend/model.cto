@@ -1,0 +1,101 @@
+namespace org.blockchain.health
+
+/** Enums **/
+
+enum Status {
+ o diagnosed
+ o undiagnosed
+}
+
+/** Participants **/
+
+participant Doctor identified by login {  
+  o String login
+  o String password
+  
+  o String name optional
+  o String address optional
+  
+  o Integer balance default = 0
+}
+
+participant MLA identified by login {
+  o String login
+  o String password
+  
+  o String name optional
+  o String address optional
+  
+  o Integer balance default = 0
+}
+
+/** Assets **/
+
+asset Image identified by id_img {
+  o String id_img
+  --> Doctor doc
+  --> MLA mla optional
+  o Status status default = "undiagnosed"
+  o Boolean cancer optional
+  o Integer width
+  o Integer height
+  o String img_base64
+  o String img_csv
+}
+
+/** Transactions & Events **/
+
+/** Doctor **/
+  
+transaction create_img {
+  o String login default = "login"
+  o String password default = "password"
+  
+  o Integer width
+  o Integer height
+  o String img_base64
+  o String img_csv
+}
+  
+event create_img_event{}
+  
+transaction delete_img {
+  o String login default = "login"
+  o String password default = "password"
+  o String id_img 
+}
+  
+event delete_img_event{} 
+
+transaction increase_balance_doc {  
+  o String login default = "login"
+  o String password default = "password"
+  
+  o Integer amount
+}
+  
+event increase_balance_doc_event{}
+
+event send_payment_event{}
+  
+/** Machine Learning Architect **/
+  
+transaction diagnose_img {
+  o String login default = "login"
+  o String password default = "password"
+  o String id_img
+  o Boolean cancer
+}
+  
+event diagnose_img_event{}
+  
+transaction increase_balance_mla {
+  o String login default = "login"
+  o String password default = "password"
+  
+  o Integer amount
+}
+  
+event increase_balance_mla_event{}
+  
+event receive_payment_event{}

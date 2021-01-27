@@ -1,0 +1,79 @@
+// Doctor
+
+query selectDoctor {
+	description: "find all docs"
+	statement:
+		SELECT org.blockchain.health.Doctor
+}
+
+query getDoctor {
+	description: "find the selected Participant"
+	statement:
+		SELECT org.blockchain.health.Doctor
+  			WHERE (login == _$login AND password == _$password)
+}
+
+// MLA
+
+query getMLA {
+	description: "find the selected Participant"
+	statement:
+		SELECT org.blockchain.health.MLA
+  			WHERE (login == _$login AND password == _$password)
+}
+
+query selectMLA {
+	description: "find all mlas"
+	statement:
+		SELECT org.blockchain.health.MLA
+}
+
+// Image
+
+query selectImg {
+	description: "find all images"
+	statement:
+		SELECT org.blockchain.health.Image
+}
+
+query selectImageById {
+  description: "find all images by id"
+  statement:
+      SELECT org.blockchain.health.Image
+          WHERE (id_img==_$id_img)
+}
+
+query selectImageByDoctor {
+	description: "find images by doctor"
+	statement:
+		SELECT org.blockchain.health.Image
+			WHERE (doc == _$doc)
+}
+
+query selectImageByMLA {
+	description: "find images by mla"
+	statement:
+		SELECT org.blockchain.health.Image
+			WHERE (mla == _$mla)
+}
+
+query selectImageByUndiagnosed {
+ 	description: "find images by status undiagnosed"
+  	statement:
+  		SELECT org.blockchain.health.Image
+  			WHERE (status == "undiagnosed")
+}
+
+query selectImageWithCancer {
+  	description: "find images with cancer"
+  	statement:
+  		SELECT org.blockchain.health.Image
+  			WHERE (cancer == true)
+}
+
+query selectImageWithoutCancer {
+  	description: "find images without cancer"
+  	statement:
+  		SELECT org.blockchain.health.Image
+  			WHERE (cancer == false)
+}

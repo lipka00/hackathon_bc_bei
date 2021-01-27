@@ -1,0 +1,129 @@
+// Doctor
+
+rule doc_allow_create_image {
+	description: "all doctors can create an image"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: CREATE
+    resource: "org.blockchain.health.Image"
+  	transaction: "org.blockchain.health.create_img"
+  	action: ALLOW
+}
+
+rule doc_allow_read_himself {
+  	description: "a doctor can only read & delete own images"
+  	participant(doctor): "org.blockchain.health.Doctor"
+  	operation: READ
+    resource(d): "org.blockchain.health.Doctor"
+  	condition: (doctor.getIdentifier() == d.getIdentifier())
+  	action: ALLOW 
+}
+
+rule doc_allow_read_update_image {
+  	description: "a doctor can only read & delete own images"
+  	participant(doctor): "org.blockchain.health.Doctor"
+  	operation: READ, DELETE
+    resource(image): "org.blockchain.health.Image"
+  	condition: (doctor.getIdentifier() == image.doc.getIdentifier())
+  	action: ALLOW
+}
+
+rule doc_deny_delete_image {
+  	description: "a doctor can not delete images from other doctors & a doctor can not update images"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: DELETE, UPDATE
+    resource: "org.blockchain.health.Image"
+  	action: DENY
+}
+
+rule doc_deny_diagnose_image {
+	description: "all doctors can not diagnose an image"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: ALL
+    resource: "org.blockchain.health.Image"
+  	transaction: "org.blockchain.health.diagnose_img"
+  	action: DENY
+}
+
+
+// MLA
+
+rule mla_allow_read_himself {
+  	description: "a doctor can only read & delete own images"
+  	participant(mla): "org.blockchain.health.MLA"
+  	operation: READ
+    resource(m): "org.blockchain.health.MLA"
+  	condition: (mla.getIdentifier() == m.getIdentifier())
+  	action: ALLOW 
+}
+
+rule mla_allow_read_image {
+  	description: "a doctor can only read & delete own images"
+  	participant(mla): "org.blockchain.health.MLA"
+  	operation: READ
+    resource(image): "org.blockchain.health.Image"
+  	condition: (mla.getIdentifier() == image.mla.getIdentifier())
+  	action: ALLOW
+}
+
+rule mla_allow_read_image2 {
+  	description: "a doctor can only read & delete own images"
+  	participant: "org.blockchain.health.MLA"
+  	operation: READ
+    resource(image): "org.blockchain.health.Image"
+  	condition: (image.status == "undiagnosed")
+  	action: ALLOW
+}
+
+rule mla_allow_diagnose_image {
+	description: "all mlas can only diagnose undiagnosed images"
+  	participant: "org.blockchain.health.MLA"
+  	operation: UPDATE
+    resource(image): "org.blockchain.health.Image"
+  	transaction: "org.blockchain.health.diagnose_img"
+  	condition: (image.status == "undiagnosed")
+  	action: ALLOW
+}
+
+rule mla_deny_diagnosed_images {
+	description: "all mlas can not diagnose diagnosed images"
+  	participant: "org.blockchain.health.MLA"
+  	operation: UPDATE
+    resource: "org.blockchain.health.Image"
+  	transaction: "org.blockchain.health.diagnose_img"
+  	action: DENY
+}
+
+rule mla_deny_create_image {
+	description: "all mlas can not create an image"
+  	participant: "org.blockchain.health.MLA"
+  	operation: ALL
+    resource: "org.blockchain.health.Image"
+  	transaction: "org.blockchain.health.create_img"
+  	action: DENY
+}
+// Administration
+
+
+rule SystemACL {
+    description: "System ACL to permit all access"
+    participant: "org.hyperledger.composer.system.Participant"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
