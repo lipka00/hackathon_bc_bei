@@ -21,7 +21,7 @@ class Participants extends Component {
       <div style ={divStyle}>
       <div>
           <h2>Profile</h2>
-          <MLAInfo participants = { this.props.participants } />
+          <MLAInfo participants2 = { this.props.participants2 } />
       </div>
       </div>
       );

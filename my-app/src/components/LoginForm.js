@@ -12,6 +12,11 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('load', this.handleChange3());
+    window.addEventListener('load', this.handleChange4());
+  }
+
 handleChange = event => {
    event.preventDefault();
    this.setState ({
@@ -27,14 +32,14 @@ handleChange = event => {
 }
 
 handleChange3 = event => {
-  event.preventDefault();
+  //event.preventDefault();
   this.setState ({
    type_child: "doc"
   });
 }
 
 handleChange4 = event => {
-  event.preventDefault();
+  //event.preventDefault();
   this.setState ({
    type_child: "mla"
   });
@@ -56,7 +61,7 @@ logOut = () => {
   return (
     <div className="Login">
       {this.state.logged_in == false ? 
-      <form action='#' onSubmit={this.sendToParent}>
+      <form  onSubmit={this.sendToParent}>
       <div className="form-inner">
         <div className="form-group">
           <label htmlFor="login">Login</label>
@@ -64,27 +69,27 @@ logOut = () => {
           type="text" 
           id="login" 
           placeholder="E-Mail"
-          onChange={this.handleChange} />
+          onBlur={this.handleChange} />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor = "password">Password</label>
           <input 
           type="password" 
           id="password" 
           placeholder="Password" 
-          onChange={this.handleChange2}/>
+          onBlur={this.handleChange2}/>
         </div>
         <div className="form-group">
           <div className="checkbox">
           <div>
-          <input type="checkbox" id="doc" name="doc" value="doc" onChange={this.handleChange3}
+          <input type="checkbox" id="doc" name="doc" value="doc" onBlur={this.handleChange3}
           />
-          <label for="scales">Doc</label>
+          <label htmlFor="scales">Doc</label>
           </div>
           <div>
-          <input type="checkbox" id="mla" name="mla" onChange={this.handleChange4}
+          <input type="checkbox" id="mla" name="mla" onBlur={this.handleChange4}
           />
-          <label for="scales">MLA</label>
+          <label htmlFor="scales">MLA</label>
           </div>
           </div>
         </div>
@@ -174,12 +179,12 @@ export default function Login(props) {
   <div>
   <input type="checkbox" id="doc" name="doc" value="doc" onChange={this.handleChange3}
   />
-  <label for="scales">Doc</label>
+  <label htmlFfor="scales">Doc</label>
   </div>
   <div>
   <input type="checkbox" id="mla" name="mla" onChange={this.handleChange4}
   />
-  <label for="scales">MLA</label>
+  <label htmlFor="scales">MLA</label>
   </div>
   </div>
 </div>

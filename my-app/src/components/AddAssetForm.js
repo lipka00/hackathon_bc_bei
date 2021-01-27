@@ -250,9 +250,9 @@ class AddAssetForm extends Component {
 AddAssetForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    iddoc: PropTypes.string.isRequired,
+    //iddoc: PropTypes.string.isRequired,
     //idimg: PropTypes.string.isRequired,
-    durationInMonths: PropTypes.string.isRequired
+    //durationInMonths: PropTypes.string.isRequired
 }
 
 export default AddAssetForm

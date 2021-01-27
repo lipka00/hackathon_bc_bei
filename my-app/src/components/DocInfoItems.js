@@ -52,7 +52,7 @@ class DocInfoItems extends Component {
         return (
             <div>
             <div style = { assetStyle.card }>
-                <p>DocID: {this.props.participant.id_doc}</p>
+                <p>Login: {this.props.participant.login}</p>
                 {this.getName()}
                 {this.getAddress()}
                 {this.getBalance()}

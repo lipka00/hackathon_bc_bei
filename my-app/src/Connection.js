@@ -1,12 +1,11 @@
 function search(query, cb) {
     return new Promise( (resolve,reject) => {
-      return fetch(`http://35.198.149.117:3000/api/${query}`, {
+      return fetch(`http://35.246.190.128:3000/api/${query}`, {
         accept: "application/json"
       })
         .then(parseJSON)
         .then(data => resolve(data));
     })
-  
   }
   
   function create(type, data){
@@ -22,7 +21,6 @@ function search(query, cb) {
       .then(parseJSON)
       .then(() => resolve())
     })
-  
   }
   
   function parseJSON(response) {

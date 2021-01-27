@@ -9,8 +9,8 @@ class AddAsset extends Component {
     // The state stores the form variables
     this.state = {
       img_base64: '',
-      login: "login",
-      password: "pasword",
+      login: "schmidt@gmx.de",
+      password: "password",
     };
   }
   
@@ -19,7 +19,7 @@ class AddAsset extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         this.props.addAsset( this.state.img_base64, this.state.login, this.state.password,);
-        this.setState({  img_base64: '', login: "login", password: "password" });
+        this.setState({  img_base64: '', login: "schmidt@gmx.de", password: "password" });
     }
 
       // Handles when information is changed in the form storing it in the state

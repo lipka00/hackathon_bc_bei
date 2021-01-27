@@ -23,6 +23,16 @@ class MLAInfoItems extends Component {
         }
     }
 
+    getBalance() {
+        if(this.props.participant2.balance != null) {
+            //console.log("exists")
+            return <p>Balance: {this.props.participant2.balance}</p>
+        }
+        else {
+            //console.log("doesnt exist")
+        }
+    }
+
     render() {
         let assetStyle = {
             card: {
@@ -42,9 +52,10 @@ class MLAInfoItems extends Component {
         return (
             <div>
             <div style = { assetStyle.card }>
-                <p>MLAID: {this.props.participant2.id_mla}</p>
+                <p>Login: {this.props.participant2.login}</p>
                 {this.getName()}
                 {this.getAddress()}
+                {this.getBalance()}
             </div>
             </div>
         )
