@@ -13,6 +13,13 @@ query getDoctor {
   			WHERE (login == _$login AND password == _$password)
 }
 
+query selectDoctorByID {
+	description: "find the selected Participant"
+	statement:
+		SELECT org.blockchain.health.Doctor
+  			WHERE (login == _$login)
+}
+
 // MLA
 
 query getMLA {

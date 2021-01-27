@@ -37,8 +37,8 @@ asset Image identified by id_img {
   --> MLA mla optional
   o Status status default = "undiagnosed"
   o Boolean cancer optional
-  o Integer width
-  o Integer height
+  o Integer width default = 200
+  o Integer height default = 300
   o String img_base64
   o String img_csv
 }
@@ -51,9 +51,9 @@ transaction create_img {
   o String login default = "login"
   o String password default = "password"
   
-  o Integer width
-  o Integer height
-  o String img_base64
+  o Integer width default = 200
+  o Integer height default = 300
+  o String img_base64 
   o String img_csv
 }
   
