@@ -26,7 +26,9 @@ class App extends Component {
     images2: [],
     login: "",
     password: "",
-    type: ""
+    type: "",
+    login_mla: "",
+    login_doc: ""
   }
 
   componentWillMount() {
@@ -68,6 +70,27 @@ class App extends Component {
       if(img_base64 != 0  ) {
         alert("Success")
       }
+    })
+  }
+
+  addDiagnose = () => {
+    //create Image Object
+    const data = {
+      '$class': "org.blockchain.health.diagnose_img",
+      //'id_doc': id_doc,
+      //'id_img': id_img,
+      'login': "schulze@gmail.com",
+      'password': "password"
+    }
+    //send this data to the Hyperledger Network
+    Connection.create('diagnose_img', data)
+    .then((err) => {
+      if(err) {
+        console.log(err)
+      }
+      //Get the new Image
+      this.getImagesDiagnosed()
+      
     })
   }
 
@@ -176,7 +199,7 @@ class App extends Component {
         this.setState({
           images: images
         })
-        console.log("Bilder:" + images)
+        //console.log("Bilder:" + images)
       })
   }
 
@@ -203,7 +226,7 @@ class App extends Component {
         this.setState({
           images2: images2
         })
-        console.log("Bilder2:" + images2)
+        //console.log("Bilder2:" + images2)
       })
   }
  
@@ -266,7 +289,7 @@ class App extends Component {
         <Route exact path={"/diagnose"} render={props => (
           <React.Fragment>
             <div>
-            <Diagnose/>
+            <Diagnose addDiagnose={this.addDiagnose}/>
             </div>
           </React.Fragment>
         )}

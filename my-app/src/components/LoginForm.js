@@ -14,7 +14,8 @@ class Login extends Component {
 
   componentDidMount() {
     window.addEventListener('load', this.handleChange3());
-    window.addEventListener('load', this.handleChange4());
+    //window.addEventListener('load', this.logOut());
+    this.setState({logged_in:false, login_child: "", password_child:"", type_child:""});
   }
 
 handleChange = event => {
@@ -34,22 +35,25 @@ handleChange = event => {
 handleChange3 = event => {
   //event.preventDefault();
   this.setState ({
-   type_child: "doc"
-  });
-}
+   type_child: "doc"}, this.sendToParent);
+  };
+
 
 handleChange4 = event => {
   //event.preventDefault();
   this.setState ({
-   type_child: "mla"
-  });
+   type_child: "mla"}, this.sendToParent);
 }
 
  sendToParent = () => {
   //here calling Parents changeValue
-  this.setState({logged_in:true})
+  //this.setState({logged_in:true});
   this.props.getChildInputOnSubmit(this.state.login_child, this.state.password_child, this.state.type_child);
 };
+
+logIn = () => {
+  this.setState({logged_in:true});
+}
 
 logOut = () => {
   this.setState({logged_in:false, login_child: "", password_child:"", type_child:""});
@@ -93,8 +97,9 @@ logOut = () => {
           </div>
           </div>
         </div>
-        <button id ="loginButton"  type='submit'>Login</button>
+        <button id ="loginButton"  type='submit' onClick={this.logIn}>Login</button>
       </div>
+
     </form>
     :
     <form action='#' onSubmit={this.logOut}>
