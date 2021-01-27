@@ -46,11 +46,15 @@ body {
             canvas.height = img.height;
             var ctx = canvas.getContext("2d");
             ctx.drawImage(img,0,0);
-            //alert(canvas.toDataURL("image/png"));
-        		var data = canvas.toDataURL("image/png");
-            console.log(data);
-        }       
-        return data;
+            alert(canvas.toDataURL("image/png"));
+        		console.log(canvas.toDataURL("image/png"));  
+        }
+
+        function write(msg) {
+            var p = document.createElement('p');
+            p.innerHTML = msg;
+            document.body.appendChild(p);
+        }
     }
 
 </script>
@@ -59,7 +63,6 @@ body {
 <form action='#' onsubmit="return false;">
     <input type='file' id='imgfile' />
     <input type='button' id='btnLoad' value='Load' onclick='loadImage();' />
-
 </form>
     <canvas id="canvas"></canvas>
 </body>

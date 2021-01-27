@@ -1,0 +1,278 @@
+// Doctor
+
+// Transaktionen
+
+// increase_balance_doc
+
+rule doc_allow_increase_balance {
+  	description: "Ärzte können ihre Kontostände erhöhen"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: CREATE
+    resource: "org.blockchain.health.increase_balance_doc"
+  	action: ALLOW
+}
+
+rule doc_allow_increase_balance2 {
+	description: "Innerhalb der Transaktion können Doktoren sich Updaten"
+  	participant(doctor): "org.blockchain.health.Doctor"
+  	operation: UPDATE
+    resource(d): "org.blockchain.health.Doctor"
+  	transaction: "org.blockchain.health.increase_balance_doc"
+  	condition: (doctor.getIdentifier() == d.getIdentifier())
+  	action: ALLOW
+}
+
+rule doc_allow_increase_balance3 {
+	description: "Innerhalb der Transaktion können Doktoren andere nicht Updaten"
+  	participant(doctor): "org.blockchain.health.Doctor"
+  	operation: UPDATE
+    resource(d): "org.blockchain.health.Doctor"
+  	transaction: "org.blockchain.health.increase_balance_doc"
+  	condition: (doctor.getIdentifier() !== d.getIdentifier())
+  	action: DENY
+}
+
+// increase_balance_mla
+
+rule doc_deny_increase_balance {
+  	description: "Ärzte können MLA-Kontostände nicht erhöhen"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: CREATE
+    resource: "org.blockchain.health.increase_balance_mla"
+  	action: DENY
+}
+
+// create_img
+
+rule doc_allow_create_image {
+	description: "Alle Ärzte können in MRT-Bild erstellen"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: CREATE
+    resource: "org.blockchain.health.create_img"
+  	action: ALLOW
+}
+
+rule doc_allow_create_image2 {
+	description: "Alle Ärzte können in der Transaktion ein neues MRT-Bild speichern"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: CREATE
+    resource: "org.blockchain.health.Image"
+  	transaction: "org.blockchain.health.create_img"
+  	action: ALLOW
+}
+
+// diagnose_img
+
+rule doc_deny_diagnose_image {
+	description: "Ärzte können keine MRT-Scans diagnostizieren"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: ALL
+    resource: "org.blockchain.health.diagnose_img"
+  	action: DENY
+}
+
+// delete_img
+
+rule doc_allow_delete_image {
+  	description: "Ärzte können MRT-Scans löschen"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: CREATE
+    resource: "org.blockchain.health.delete_img"
+  	action: ALLOW
+}
+
+rule doc_allow_delete_image2 {
+  	description: "Ein Doktor kann eigene MRT-Scans löschen"
+  	participant(doctor): "org.blockchain.health.Doctor"
+  	operation: DELETE
+    resource(image): "org.blockchain.health.Image"
+  	transaction: "org.blockchain.health.delete_img"
+  	condition: (doctor.getIdentifier() == image.doc.getIdentifier())
+  	action: ALLOW
+}
+
+rule doc_deny_delete_image {
+  	description: "Ein Doktor MRT-Scans von Dritten nicht löschen"
+  	participant: "org.blockchain.health.Doctor"
+  	operation: DELETE
+    resource: "org.blockchain.health.Image"
+    transaction: "org.blockchain.health.delete_img"
+  	action: DENY
+}
+
+// Allgemein
+
+rule doc_allow_read_himself {
+  	description: "Ein Arzt kann nur sich selbst sehen"
+  	participant(doctor): "org.blockchain.health.Doctor"
+  	operation: READ
+    resource(d): "org.blockchain.health.Doctor"
+  	condition: (doctor.getIdentifier() == d.getIdentifier())
+  	action: ALLOW
+}
+
+rule doc_allow_read_update_image {
+  	description: "Ein Arzt kann nur eigene MRT-Bilder sehen und löschen"
+  	participant(doctor): "org.blockchain.health.Doctor"
+  	operation: READ, DELETE
+    resource(image): "org.blockchain.health.Image"
+  	condition: (doctor.getIdentifier() == image.doc.getIdentifier())
+  	action: ALLOW
+}
+
+// MLA
+
+// Transaktionen
+
+// increase_balance_doc
+
+rule mla_deny_increase_balance {
+  	description: "MLAs können Arzt-Kontostände nicht erhöhen"
+  	participant: "org.blockchain.health.MLA"
+  	operation: CREATE
+    resource: "org.blockchain.health.increase_balance_doc"
+  	action: DENY
+}
+
+// increase_balance_mla
+
+rule mla_allow_increase_balance {
+  	description: "MLAs können ihre Kontostände erhöhen"
+  	participant: "org.blockchain.health.MLA"
+  	operation: CREATE
+    resource: "org.blockchain.health.increase_balance_mla"
+  	action: ALLOW
+}
+
+rule mla_allow_increase_balance2 {
+	description: "Innerhalb der Transaktion können MLAs sich Updaten"
+  	participant(mla): "org.blockchain.health.MLA"
+  	operation: UPDATE
+    resource(m): "org.blockchain.health.MLA"
+  	transaction: "org.blockchain.health.increase_balance_mla"
+  	condition: (mla.getIdentifier() == m.getIdentifier())
+  	action: ALLOW
+}
+
+rule mla_allow_increase_balance3 {
+	description: "Innerhalb der Transaktion können MLAs andere nicht Updaten"
+  	participant(mla): "org.blockchain.health.MLA"
+  	operation: UPDATE
+    resource(m): "org.blockchain.health.MLA"
+  	transaction: "org.blockchain.health.increase_balance_mla"
+  	condition: (mla.getIdentifier() !== m.getIdentifier())
+  	action: DENY
+}
+
+// create_img
+
+rule mla_deny_create_image {
+	description: "MLAs können keine MRT-Scans erstellen"
+  	participant: "org.blockchain.health.MLA"
+  	operation: ALL
+    resource: "org.blockchain.health.create_img"
+  	action: DENY
+}
+
+// diagnose_img
+
+rule mla_allow_diagnose_image {
+	description: "Alle MLAs können ein MRT-Bild diagnostizieren"
+  	participant: "org.blockchain.health.MLA"
+  	operation: CREATE
+    resource: "org.blockchain.health.diagnose_img"
+  	action: ALLOW
+}
+
+rule mla_allow_diagnose_image2 {
+	description: "Alle MLAs können nur undiagnostizierte MRT-Bilder diagnostizieren"
+  	participant: "org.blockchain.health.MLA"
+  	operation: UPDATE
+    resource(image): "org.blockchain.health.Image"
+  	transaction: "org.blockchain.health.diagnose_img"
+  	condition: (image.status == "undiagnosed")
+  	action: ALLOW
+}
+
+rule mla_allow_diagnose_image3 {
+	description: "Alle MLAs können innerhalb der Transaktion auf Ärzte zugreifen um den Kontostand zu ändern"
+  	participant: "org.blockchain.health.MLA"
+  	operation: READ, UPDATE
+    resource: "org.blockchain.health.Doctor"
+  	transaction: "org.blockchain.health.diagnose_img"
+  	action: ALLOW
+}
+
+rule mla_allow_diagnose_image4 {
+	description: "Alle MLAs können innerhalb der Transaktion auf sich selbst zugreifen um den Kontostand zu ändern"
+  	participant: "org.blockchain.health.MLA"
+  	operation: READ, UPDATE
+    resource: "org.blockchain.health.MLA"
+  	transaction: "org.blockchain.health.diagnose_img"
+  	action: ALLOW
+}
+
+// delete_img
+
+rule mla_deny_delete_image {
+	description: "MLAs können keine MRT-Scans löschen"
+  	participant: "org.blockchain.health.MLA"
+  	operation: ALL
+    resource: "org.blockchain.health.delete_img"
+  	action: DENY
+}
+
+// Allgemein
+
+rule mla_allow_read_himself {
+  	description: "Ein MLA kann nur sich selbst sehen"
+  	participant(mla): "org.blockchain.health.MLA"
+  	operation: READ
+    resource(m): "org.blockchain.health.MLA"
+  	condition: (mla.getIdentifier() == m.getIdentifier())
+  	action: ALLOW
+}
+
+rule mla_allow_read_image {
+  	description: "Ein MLA kann nur eigene MRT-Bilder sehen"
+  	participant(mla): "org.blockchain.health.MLA"
+  	operation: READ
+    resource(image): "org.blockchain.health.Image"
+  	condition: (mla.getIdentifier() == image.mla.getIdentifier())
+  	action: ALLOW
+}
+
+rule mla_allow_read_image2 {
+  	description: "Ein MLA kann nur undiagnostizierte MRT-Bilder sehen"
+  	participant: "org.blockchain.health.MLA"
+  	operation: READ
+    resource(image): "org.blockchain.health.Image"
+  	condition: (image.status == "undiagnosed")
+  	action: ALLOW
+}
+
+// Administration
+
+rule SystemACL {
+    description: "System ACL to permit all access"
+    participant: "org.hyperledger.composer.system.Participant"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
