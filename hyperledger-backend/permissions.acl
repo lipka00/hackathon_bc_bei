@@ -130,7 +130,7 @@ rule mla_allow_increase_balance {
 }
 
 rule mla_allow_increase_balance2 {
-  	description: "all doctors can increase their balance"
+  	description: "all mlas can increase their balance"
   	participant: "org.blockchain.health.MLA"
   	operation: UPDATE
     resource: "org.blockchain.health.MLA"
