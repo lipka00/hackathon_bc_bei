@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header'
@@ -13,6 +13,7 @@ import Login from './components/LoginForm'
 import Upload from './components/Upload'
 import Images from './components/Images'
 import Diagnose from './components/Diagnose'
+import ls from 'local-storage'
 
 class App extends Component {
 
@@ -32,6 +33,15 @@ class App extends Component {
     cancer: ''
   }
 
+  componentDidMount() {
+    fetch(URL)
+    .then(response => response.json())
+    .then(json => this.setState({
+      type: ls.get('type') || [],
+      password: ls.get('password') || []
+    }));
+  }
+
   componentWillMount() {
     this.getAssets()
     this.getParticipants()
@@ -46,6 +56,8 @@ class App extends Component {
       password: password,
       type: type
     });
+    ls.set('type', type);
+    ls.set('password', password);
   }
 
   addAsset = (img_base64) => {

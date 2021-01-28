@@ -72,7 +72,7 @@ class ImagesItemsDiagnosed extends Component {
             <div style = { assetStyle.card }>
                 <p>ImageID: {this.props.images2.id_img}</p>
                 <p>Status: {this.props.images2.status}</p>
-                {this.props.images2.cancer ? <p>Cancer detected</p> : <p>No Cancer detected</p>}
+                {this.props.images2.cancer ? <p><b>Cancer detected</b></p> : <p><b>No Cancer detected</b></p>}
                 <img style={assetStyle.imgStyle} src={this.props.images2.img_base64} alt={this.props.images2.img_base64} width="200" height="150"></img>
                 <div style={assetStyle.divStyle}>
                     <button style={assetStyle.submitStyle3} value="druck" onClick={this.getString}>Update</button>

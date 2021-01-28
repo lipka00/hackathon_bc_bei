@@ -24,13 +24,13 @@ class AddDiagnoseForm extends Component {
 
       _handleRadio1(event) {
         const haveCancer2 = event.currentTarget.value == 'true' ? true: false;
-        console.log('handle', haveCancer2);
+        //console.log('handleCancer', haveCancer2);
         this.setState({ haveCancer:haveCancer2 });
       }
       
       _handleRadio2(event) {
         const haveCancer2 = event.currentTarget.value == 'false' ? false: true;
-        console.log('handle', haveCancer2);
+        //console.log('handleCancer', haveCancer2);
         this.setState({ haveCancer:haveCancer2 });
       }
     
@@ -147,7 +147,7 @@ class AddDiagnoseForm extends Component {
                 { this.state.success == true ? 
                 <div className="infobox">
                     <p>Diagnose Successful</p>
-                    <p>Diagnose for Image {this.state.id_img} submitted to blockchain</p>
+                    <p>Diagnose for Image {this.props.id_img} submitted to blockchain</p>
                 </div> 
                 :
                 <div className="infobox2">

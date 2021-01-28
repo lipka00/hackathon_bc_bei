@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Background from '../images/blockchain.jpg';
+import ls from 'local-storage'
 
 var sectionStyle = {
   width: "100%",
@@ -38,6 +39,22 @@ const buttons = {
 };
 
 class Section extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      type: ''
+    };
+  }
+
+  componentDidMount() {
+    fetch(URL)
+    .then(response => response.json())
+    .then(json => this.setState({
+      type: ls.get('type') || ["k"],
+    }));
+  }
+
   render() {
     return (
       <section style={ sectionStyle }>
@@ -58,12 +75,16 @@ class Section extends Component {
           <div style={buttons}>
           <div style={ buttonStyle }>
             <div id="special">
-            <a id="special-link" href="mailto:max.mustermann@example.com?body=Hallo AI Diagnostics,">Register</a>
+            <a id="special-link" href="mailto:max.mustermann@example.com?body=Hallo AI Diagnostics,">Contact us</a>
             </div>
           </div>
           <div style={ buttonStyle }>
             <div id="special">
+            {this.state.type == "doc" || this.state.type == "mla" ?
+            <a id="special-link" href="/login">Log Out</a>
+            :
             <a id="special-link" href="/login">Login</a>
+            }
             </div>
           </div>
           </div>

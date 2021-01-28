@@ -1,5 +1,7 @@
 import React, { useState, Component } from "react";
 import "./Login.css";
+import { Persist} from 'react-persist';
+import ls from 'local-storage'
 
 class Login extends Component {
   constructor(props) {
@@ -16,6 +18,8 @@ class Login extends Component {
     window.addEventListener('load', this.handleChange3());
     //window.addEventListener('load', this.logOut());
     this.setState({logged_in:false, login_child: "", password_child:"", type_child:""});
+    ls.set('type', this.state.type_child);
+    ls.set('password', this.state.password);
   }
 
 handleChange = event => {
@@ -99,7 +103,12 @@ logOut = () => {
         </div>
         <button id ="loginButton"  type='submit' onClick={this.logIn}>Login</button>
       </div>
-
+        <Persist
+        name="login-form"
+        data={this.state}
+        debounce={500}
+        onMount={data=>this.setState(data)}
+        />
     </form>
     :
     <form action='#' onSubmit={this.logOut}>

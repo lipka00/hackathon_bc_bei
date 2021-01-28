@@ -38,7 +38,7 @@ class Assets extends Component {
       <div style ={divStyle}>
       <div>
         <div style = { style.UserAssetsStyle }>
-          <h2>Uploaded Images</h2>
+          <h2>My Uploaded Images</h2>
           <UserAssets assets = { this.props.assets } />
         </div>
       </div>
