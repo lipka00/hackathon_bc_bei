@@ -28,7 +28,8 @@ class App extends Component {
     password: "",
     type: "",
     login_mla: "",
-    login_doc: ""
+    login_doc: "",
+    cancer: ''
   }
 
   componentWillMount() {
@@ -73,14 +74,15 @@ class App extends Component {
     })
   }
 
-  addDiagnose = () => {
+  addDiagnose = (id_img, haveCancer) => {
     //create Image Object
     const data = {
       '$class': "org.blockchain.health.diagnose_img",
       //'id_doc': id_doc,
-      //'id_img': id_img,
+      'id_img': id_img,
+      'cancer': haveCancer,
       'login': "schulze@gmail.com",
-      'password': "password"
+      'password': "password",
     }
     //send this data to the Hyperledger Network
     Connection.create('diagnose_img', data)
@@ -89,7 +91,9 @@ class App extends Component {
         console.log(err)
       }
       //Get the new Image
-      this.getImagesDiagnosed()
+      //this.getImagesDiagnosed()
+      console.log("Image?:" + id_img)
+      console.log("Cancer?:" + haveCancer)
       
     })
   }
@@ -256,11 +260,11 @@ class App extends Component {
           <div className="infobox">
             <p>Login Successful</p>
             <p>User: {this.state.login}</p>
-            </div> 
+          </div> 
           :
           <div className="infobox2">
             <p>Fill Out Login and Password</p>
-            </div>
+          </div>
           }
           </div>
         </Route>

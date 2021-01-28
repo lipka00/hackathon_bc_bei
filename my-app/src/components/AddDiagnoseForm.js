@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Message, Form } from "semantic-ui-react";
+import './AddDiagnoseForm.css'
 
 
 class AddDiagnoseForm extends Component {
@@ -9,19 +10,31 @@ class AddDiagnoseForm extends Component {
         super(props);
         //Initial state
         this.state = {
-            img_base64: "readonly",
+            id_img: "",
             test: false,
-            success: false
+            haveCancer: ''
         };
+        this._handleRadio1 = this._handleRadio1.bind(this);
+        this._handleRadio2 = this._handleRadio2.bind(this);
     }
 
     componentDidMount(){
        
       }
 
+      _handleRadio1(event) {
+        const haveCancer2 = event.currentTarget.value == 'true' ? true: false;
+        console.log('handle', haveCancer2);
+        this.setState({ haveCancer:haveCancer2 });
+      }
+      
+      _handleRadio2(event) {
+        const haveCancer2 = event.currentTarget.value == 'false' ? false: true;
+        console.log('handle', haveCancer2);
+        this.setState({ haveCancer:haveCancer2 });
+      }
     
-
-    setSuccess = () => {
+      setSuccess = () => {
         this.setState({success:true});
     }
 
@@ -35,6 +48,7 @@ class AddDiagnoseForm extends Component {
                 marginTop: '10px',
                 padding: '10px',
                 width: '95%',
+                height: '6vh',
                 borderRadius: '6px',
                 borderStyle: 'solid',
                 borderColor: 'grey',
@@ -43,7 +57,7 @@ class AddDiagnoseForm extends Component {
             submitStyle: {
                 flex: '1',
                 background: 'green',
-                color: 'whiter',
+                color: 'white',
                 borderRadius: '4px',
                 padding: '9px',
                 margin: '3px',
@@ -56,22 +70,10 @@ class AddDiagnoseForm extends Component {
                 marginRight: 'auto',
                 marginBottom: '24px'
             },
-            submitStyle2: {
-                flex: '1',
-                background: '#d94b27',
-                color: 'white',
-                borderColor: 'grey',
-                borderRadius: '4px',
-                borderWidth: '1px',
-                padding: '9px',
-                margin: '3px',
-                marginTop: '16px',
-                cursor: 'pointer',
-                fontSize: '16px',
-                marginLeft: 'auto',
-                display: 'block',
-                marginRight: 'auto',
-                marginBottom: '0px'
+            cancerText: {
+                marginLeft: "0",
+                marginTop: '1vh',
+                fontSize: '1.35rem'
             },
             formStyle: {
                 display: 'block',
@@ -83,7 +85,13 @@ class AddDiagnoseForm extends Component {
             readonlyStyle: {
                 backgroundColor: 'grey'
             },
-
+            check: {
+                display: 'flex',
+                marginLeft: '2%',
+                marginTop: '-3%',
+                marginBottom: '5vh',
+                fontSize: '1.1rem'
+             }
         }
 
         return (
@@ -92,37 +100,61 @@ class AddDiagnoseForm extends Component {
                 <div style={style.divWrap}>
                 <div>
                     <input
-                        id="readonly"
-                        type={"text"}
-                        name={"img_base64"}
+                        type="text"
+                        name={"id_img"}
                         style={style.formComponentsStyle}
-                        value={this.state.img_base64}
-                        placeholder={"readonly"}
-                        onBlur={this.props.onChange}
-                        readOnly
-                        />
+                        placeholder={"Enter Image ID"}
+                        value={this.props.id_img}
+                        onChange={this.props.onChange}
+                    />
                 </div>
-   
+                <p style={style.cancerText}>Cancer predicted?</p>
+                <div className="radio">
+                    <label>
+                        <input 
+                        id="radio1"
+                        type="radio" 
+                        name="haveCancer" 
+                        value="true"
+                        checked={this.state.haveCancer === true}
+                        onChange={(event) => {this._handleRadio1(event);this.props.onChange(event)}} />
+                        Yes
+                    </label>
+                </div>
+                <div className="radio">
+                    <label>
+                    <input 
+                        id="radio2"
+                        type="radio" 
+                        name="haveCancer" 
+                        value={"false"}
+                        checked={this.state.haveCancer === false}
+                        onChange={(event) => {this._handleRadio2(event);this.props.onChange(event)}} />
+                    No
+                    </label>
+                </div>
                 <div>
                     <input
                         type="submit"
                         value="Submit"
-                        className="btn"
-                        value="Placeholder"
+                        value="Upload to Blockchain"
                         style={style.submitStyle}
                         onClick={(event) => {this.setSuccess(event)}}
                     />
                 </div>
                 <div>
-                {this.state.formError ? 
-                (
-                    <Message
-                    positive
-                    header="Your Image Upload was successful"
-                    content="Your Chosen Image is saved on the blockchain"
-                    />
-                ) 
-                : <p></p> } 
+                <div>
+                { this.state.success == true ? 
+                <div className="infobox">
+                    <p>Diagnose Successful</p>
+                    <p>Diagnose for Image {this.state.id_img} submitted to blockchain</p>
+                </div> 
+                :
+                <div className="infobox2">
+                    <p>Give Your Diagnose</p>
+                </div>
+                }
+                </div>
                 </div>
                 </div>
             </form>

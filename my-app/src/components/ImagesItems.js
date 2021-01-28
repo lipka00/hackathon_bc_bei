@@ -23,7 +23,7 @@ class ImagesItems extends Component {
                 display: 'block',
                 marginLeft: 'auto',
                 marginRight: 'auto'
-            }
+            },
         }
 
 
